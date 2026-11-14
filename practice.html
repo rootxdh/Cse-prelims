@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Topic Practice — CSAT | CSE Prelims Lab</title>
+<meta name="description" content="Attempt topic-wise CSAT questions with a session timer, filters, bookmarks and answer explanations.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body data-page="csat">
+<div data-site-header></div>
+
+<main class="practice-shell" id="practice-root">
+  <div class="container">
+    <div class="practice-topline">
+      <div>
+        <div class="breadcrumbs">
+          <a href="index.html">Home</a><span>/</span>
+          <a href="csat.html">CSAT</a><span>/</span>
+          <a id="crumb-track" href="csat.html#quant">Quantitative Aptitude</a><span>/</span>
+          <span id="crumb-topic">Topic</span>
+        </div>
+        <h1 id="topic-title">Loading…</h1>
+        <p id="topic-sub"></p>
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.7rem">
+          <span class="chip chip-accent" id="topic-chip-track">Quant</span>
+          <span class="chip" id="topic-chip-count">50 questions</span>
+          <span class="chip" id="topic-chip-level">Core</span>
+        </div>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-ghost btn-sm" data-shuffle><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6M4 4l5 5"/></svg> Shuffle</button>
+        <button type="button" class="btn btn-ghost btn-sm" data-reset><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg> Reset topic</button>
+      </div>
+    </div>
+
+    <div class="practice-layout">
+      <aside class="practice-side">
+        <div class="side-card">
+          <h3>Topic progress</h3>
+          <div class="progress-big">
+            <div class="mini-bar"><span data-progress-fill style="width:0%"></span></div>
+            <div class="progress-label"><span>Attempted</span><span data-progress-label>0%</span></div>
+          </div>
+          <div class="stat-line"><span>Questions</span><b data-pstat="total">50</b></div>
+          <div class="stat-line"><span>Attempted</span><b data-pstat="attempted">0</b></div>
+          <div class="stat-line"><span>Correct</span><b data-pstat="correct">0</b></div>
+          <div class="stat-line"><span>Accuracy</span><b data-pstat="accuracy">—</b></div>
+          <div class="stat-line"><span>Bookmarked</span><b data-pstat="bookmarked">0</b></div>
+        </div>
+
+        <div class="side-card">
+          <h3>Question map</h3>
+          <div class="q-nav" id="q-nav" aria-label="Jump to question"></div>
+          <div style="display:flex;gap:.7rem;flex-wrap:wrap;margin-top:.7rem;font-size:.68rem;color:var(--muted)">
+            <span style="display:inline-flex;align-items:center;gap:.3rem"><i style="width:9px;height:9px;border-radius:3px;background:var(--success-soft);border:1px solid var(--success)"></i> Correct</span>
+            <span style="display:inline-flex;align-items:center;gap:.3rem"><i style="width:9px;height:9px;border-radius:3px;background:var(--danger-soft);border:1px solid var(--danger)"></i> Wrong</span>
+            <span style="display:inline-flex;align-items:center;gap:.3rem"><i style="width:9px;height:9px;border-radius:3px;background:var(--blue-soft);border:1px solid var(--blue)"></i> Seen</span>
+          </div>
+        </div>
+
+        <div class="side-card">
+          <h3>Session</h3>
+          <div class="stat-line"><span>Time</span><b id="session-timer">00:00</b></div>
+          <button type="button" class="btn btn-ghost btn-sm" data-pause style="width:100%;margin-top:.35rem">Pause</button>
+          <p class="muted" style="margin:.7rem 0 0">Aim for 50 seconds per question. If you cross 75 seconds, mark it and move on.</p>
+        </div>
+      </aside>
+
+      <section class="practice-main">
+        <div class="practice-toolbar">
+          <div class="filter-group" role="group" aria-label="Filter questions">
+            <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" class="filter-btn" data-filter="unattempted" aria-pressed="false">Unattempted</button>
+            <button type="button" class="filter-btn" data-filter="incorrect" aria-pressed="false">Incorrect</button>
+            <button type="button" class="filter-btn" data-filter="bookmarked" aria-pressed="false">Bookmarked</button>
+          </div>
+          <div class="toolbar-right">
+            <span class="timer" id="visible-count">50 shown</span>
+          </div>
+        </div>
+        <div class="question-list" id="question-list"></div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<div data-site-footer></div>
+
+<script src="data/topics.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/practice.js"></script>
+</body>
+</html>

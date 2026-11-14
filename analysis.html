@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2021–2026 CSAT Analysis — Topic Weightage &amp; 2027 Outlook | CSE Prelims Lab</title>
+<meta name="description" content="Year-wise analysis of UPSC CSAT 2021–2026: section mix, topic weightage heatmaps, difficulty trends and what to expect in CSE 2027 Paper II.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+  .analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .heat { grid-template-columns: 220px repeat(6, 1fr); align-items: center; }
+  .heat-head { font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); text-align: center; font-weight: 800; padding: .3rem; }
+  .heat-row-label { font-size: .78rem; color: var(--ink-2); font-weight: 600; padding-right: .5rem; line-height: 1.25; }
+  .heat-row-label a { color: inherit; text-decoration: none; }
+  .heat-row-label a:hover { color: var(--accent); }
+  .insight-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .insight-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.15rem 1.2rem; box-shadow: var(--shadow-sm); }
+  .insight-card h3 { font-size: .95rem; margin-bottom: .45rem; }
+  .insight-card p { font-size: .85rem; color: var(--ink-2); margin: 0; line-height: 1.55; }
+  .year-note { display: grid; grid-template-columns: 70px 110px 1fr; gap: .8rem; align-items: start; padding: .85rem 0; border-bottom: 1px solid var(--line); font-size: .85rem; }
+  .year-note:last-child { border-bottom: 0; }
+  .year-note b { font-size: .95rem; }
+  .year-note p { margin: 0; color: var(--ink-2); line-height: 1.5; }
+  @media (max-width: 860px) {
+    .analysis-grid, .insight-grid { grid-template-columns: 1fr; }
+    .heat { grid-template-columns: 150px repeat(6, 1fr); }
+    .heat-row-label { font-size: .7rem; }
+    .year-note { grid-template-columns: 54px 1fr; }
+    .year-note p { grid-column: 1 / -1; }
+  }
+</style>
+</head>
+<body data-page="analysis">
+<div data-site-header></div>
+
+<main>
+  <section class="page-head">
+    <div class="container">
+      <div class="breadcrumbs"><a href="index.html">Home</a><span>/</span><a href="csat.html">CSAT</a><span>/</span><span>Analysis</span></div>
+      <span class="chip chip-accent">Six official papers · 480 questions</span>
+      <h1 style="margin-top:.7rem">What UPSC actually asked, 2021–2026.</h1>
+      <p>We OCR'd the six official English papers, tagged every recognisable question, and read the patterns. The result: section mix, topic weightage, difficulty shifts and a calibrated forecast for CSE 2027. Use this to decide where your next 50 questions should go.</p>
+      <div class="hero-actions" style="margin-top:1.2rem">
+        <a class="btn btn-primary" href="csat.html">Open the question banks <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="papers.html">Read the original papers</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="chip chip-teal">Section mix</span>
+          <h2 style="margin-top:.6rem">Reading, Quant and Reasoning, year by year</h2>
+          <p>Estimated split of the 80 questions in each paper. RC includes passage-based inference and assumption questions; quant and reasoning counts exclude them.</p>
+        </div>
+      </div>
+      <div class="analysis-grid">
+        <div class="chart-card">
+          <h3>Estimated section mix</h3>
+          <p>80 questions per paper. Hover a bar for the year's character.</p>
+          <div class="legend" style="margin-bottom:1rem">
+            <span><i style="background:var(--teal)"></i>Reading &amp; inference</span>
+            <span><i style="background:var(--accent)"></i>Quantitative aptitude</span>
+            <span><i style="background:var(--blue)"></i>Logical reasoning</span>
+          </div>
+          <div class="bar-chart" id="mix-chart"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Paper character</h3>
+          <p>One-line verdict from the tagged question set.</p>
+          <div id="year-notes"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:.4rem">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="chip chip-accent">Quant heatmap</span>
+          <h2 style="margin-top:.6rem">Which topics keep returning</h2>
+          <p>Counts are tags of OCR-recognised questions, not the full 80. Darker = more questions that year. Click a topic to practise it.</p>
+        </div>
+      </div>
+      <div class="table-wrap" style="padding:1rem">
+        <div class="heat" id="quant-heat" aria-label="Quant topic weightage heatmap"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:.4rem">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="chip chip-blue">Reasoning heatmap</span>
+          <h2 style="margin-top:.6rem">Reasoning is a puzzle game</h2>
+          <p>Standalone reasoning only. Passage-based assumptions and inferences are counted in the reading block, which is where critical reasoning is really tested.</p>
+        </div>
+      </div>
+      <div class="table-wrap" style="padding:1rem">
+        <div class="heat" id="lr-heat" aria-label="Reasoning topic weightage heatmap"></div>
+      </div>
+      <p style="font-size:.8rem;color:var(--muted);margin-top:.8rem" id="rc-note"></p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:.4rem">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="chip chip-gold">Reading the pattern</span>
+          <h2 style="margin-top:.6rem">Eight things the papers keep telling us</h2>
+        </div>
+      </div>
+      <div class="insight-grid" id="insights"></div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:.4rem">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="chip chip-teal">Forecast</span>
+          <h2 style="margin-top:.6rem">CSE 2027: what to expect in Paper II</h2>
+          <p>Not a guess-list. These are the formats and topics that have appeared in at least four of the last six papers, weighted by 2026's drift.</p>
+        </div>
+      </div>
+      <div class="callout" style="border-left-color:var(--accent)">
+        <ol style="margin:0;padding-left:1.2rem;display:grid;gap:.5rem;font-size:.88rem" id="outlook"></ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:.4rem">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="chip chip-blue">Source notes</span>
+          <h2 style="margin-top:.6rem">One line on each paper</h2>
+          <p>Difficulty is judged on arithmetic and reasoning load, not on the reading passages.</p>
+        </div>
+      </div>
+      <div class="year-note" id="paper-notes"></div>
+    </div>
+  </section>
+</main>
+
+<div data-site-footer></div>
+
+<script src="data/topics.js"></script>
+<script src="data/analysis.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+(function () {
+  var A = (window.CATALOG && window.CATALOG.analysis) || null;
+  if (!A) return;
+
+  function esc(s) { return window.APP ? APP.escapeHtml(s) : s; }
+
+  /* section mix bars */
+  var mix = document.getElementById("mix-chart");
+  A.sectionMix.forEach(function (row) {
+    var max = 80;
+    mix.insertAdjacentHTML("beforeend",
+      '<div title="' + esc(row.note) + '">' +
+        '<div style="font-size:.72rem;color:var(--muted);font-weight:800;margin-bottom:.2rem">' + row.year + '</div>' +
+        '<div style="display:flex;height:14px;border-radius:999px;overflow:hidden;border:1px solid var(--line)">' +
+          '<span style="width:' + (row.rc / max * 100) + '%;background:var(--teal)"></span>' +
+          '<span style="width:' + (row.quant / max * 100) + '%;background:var(--accent)"></span>' +
+          '<span style="width:' + (row.lr / max * 100) + '%;background:var(--blue)"></span>' +
+        '</div>' +
+        '<div style="font-size:.68rem;color:var(--muted);margin-top:.15rem;font-variant-numeric:tabular-nums">' + row.rc + ' · ' + row.quant + ' · ' + row.lr + '</div>' +
+      '</div>');
+  });
+
+  /* year notes */
+  var yn = document.getElementById("year-notes");
+  A.sectionMix.slice().reverse().forEach(function (row) {
+    yn.insertAdjacentHTML("beforeend",
+      '<div class="year-note" style="grid-template-columns:60px 1fr">' +
+        '<b>' + row.year + '</b><p>' + esc(row.note) + '</p></div>');
+  });
+
+  /* heatmaps */
+  function heat(id, rows) {
+    var mount = document.getElementById(id);
+    var html = '<div class="heat-head"></div>' + A.years.map(function (y) { return '<div class="heat-head">' + y + "</div>"; }).join("");
+    var maxes = {};
+    A.years.forEach(function (_, i) {
+      maxes[i] = Math.max.apply(null, rows.map(function (r) { return r.counts[i]; }));
+    });
+    rows.forEach(function (r) {
+      html += '<div class="heat-row-label"><a href="practice.html?topic=' + r.id + '">' + esc(r.title) + "</a></div>";
+      r.counts.forEach(function (v, i) {
+        var lvl = v === 0 ? 0 : Math.max(1, Math.ceil(v / maxes[i] * 4));
+        html += '<div class="heat-cell" data-v="' + lvl + '" title="' + esc(r.title) + ' — ' + A.years[i] + ": " + v + ' tagged">' + (v || "·") + "</div>";
+      });
+    });
+    mount.innerHTML = html;
+  }
+  heat("quant-heat", A.quantHeat);
+  heat("lr-heat", A.lrHeat);
+  document.getElementById("rc-note").textContent = A.rcNote;
+
+  /* insights */
+  var ins = document.getElementById("insights");
+  A.insights.forEach(function (x) {
+    ins.insertAdjacentHTML("beforeend", '<div class="insight-card"><h3>' + esc(x.title) + "</h3><p>" + esc(x.body) + "</p></div>");
+  });
+
+  /* outlook */
+  var ol = document.getElementById("outlook");
+  A.outlook.forEach(function (x) { ol.insertAdjacentHTML("beforeend", "<li>" + esc(x) + "</li>"); });
+
+  /* paper notes */
+  var pn = document.getElementById("paper-notes");
+  A.paperNotes.forEach(function (p) {
+    pn.insertAdjacentHTML("beforeend",
+      '<div class="year-note"><b>' + p.year + '</b><span class="chip chip-' + (p.tone || "teal") + '" style="justify-self:start">' + esc(p.label) + '</span><p>' + esc(p.text) + "</p></div>");
+  });
+})();
+</script>
+</body>
+</html>
