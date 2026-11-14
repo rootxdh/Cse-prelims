@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paper Test — CSE Prelims Lab</title>
+<meta name="description" content="Attempt the quantitative aptitude and logical reasoning sections of an official UPSC CSAT paper as a timed test, then review solutions.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body data-page="papers">
+<div data-site-header></div>
+
+<main class="practice-shell" id="paper-root">
+  <div class="container">
+    <div class="practice-topline">
+      <div>
+        <div class="breadcrumbs">
+          <a href="index.html">Home</a><span>/</span>
+          <a href="papers.html">Papers</a><span>/</span>
+          <span id="crumb-paper">Test</span>
+        </div>
+        <h1 id="paper-title">Loading…</h1>
+        <p id="paper-sub"></p>
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.7rem" id="paper-chips"></div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-ghost btn-sm" id="pdf-link" href="papers.html" download>Official PDF</a>
+        <a class="btn btn-ghost btn-sm" href="papers.html">All papers</a>
+      </div>
+    </div>
+
+    <div id="intro-panel">
+      <div class="empty-state">Loading test…</div>
+    </div>
+
+    <div id="result-panel" hidden></div>
+
+    <div class="practice-layout" id="test-layout" hidden>
+      <aside class="practice-side">
+        <div class="side-card">
+          <h3>Test status</h3>
+          <div class="stat-line"><span>Time left</span><b id="test-timer" class="timer">120:00</b></div>
+          <div class="progress-big">
+            <div class="mini-bar"><span id="answer-fill" style="width:0%"></span></div>
+            <div class="progress-label"><span>Answered</span><span id="answer-label">0%</span></div>
+          </div>
+          <div class="stat-line"><span>Answered</span><b id="stat-answered">0</b></div>
+          <div class="stat-line"><span>Total</span><b id="stat-total">0</b></div>
+          <button type="button" class="btn btn-primary" id="submit-btn" style="width:100%;margin-top:.6rem">Submit test</button>
+          <p class="muted" style="margin:.7rem 0 0">Answers save automatically. Submitting locks the paper and unlocks all solutions.</p>
+        </div>
+
+        <div class="side-card">
+          <h3>Question map</h3>
+          <div class="q-nav" id="palette" aria-label="Jump to question"></div>
+          <div style="display:flex;gap:.7rem;flex-wrap:wrap;margin-top:.7rem;font-size:.68rem;color:var(--muted)">
+            <span style="display:inline-flex;align-items:center;gap:.3rem"><i style="width:9px;height:9px;border-radius:3px;background:var(--blue-soft);border:1px solid var(--blue)"></i> Answered</span>
+            <span style="display:inline-flex;align-items:center;gap:.3rem"><i style="width:9px;height:9px;border-radius:3px;background:var(--success-soft);border:1px solid var(--success)"></i> Correct</span>
+            <span style="display:inline-flex;align-items:center;gap:.3rem"><i style="width:9px;height:9px;border-radius:3px;background:var(--danger-soft);border:1px solid var(--danger)"></i> Wrong</span>
+          </div>
+        </div>
+      </aside>
+
+      <section class="practice-main">
+        <div class="practice-toolbar">
+          <span class="timer">Official paper order · original question numbers</span>
+          <div class="toolbar-right">
+            <button type="button" class="btn btn-ghost btn-sm" id="expand-solutions" hidden>Expand all solutions</button>
+          </div>
+        </div>
+        <div class="question-list" id="question-list"></div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<div data-site-footer></div>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/paper-test.js"></script>
+</body>
+</html>

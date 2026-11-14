@@ -624,6 +624,18 @@ details.answer summary:hover { background: var(--accent-soft); }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; scroll-behavior: auto !important; }
 }
 
+/* ---------- paper tests ---------- */
+
+[hidden] { display: none !important; }
+#test-timer.is-low { color: var(--danger); border-color: var(--danger); }
+.results-panel { margin-bottom: 1rem; }
+.results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: .7rem; margin: .3rem 0 .9rem; }
+.result-stat { background: var(--surface-2); border: 1px solid var(--line); border-radius: 9px; padding: .7rem .8rem; }
+.result-stat span { display: block; font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: .2rem; }
+.result-stat b { font-size: 1.25rem; font-variant-numeric: tabular-nums; }
+.tag-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0 1.2rem; margin-bottom: .3rem; }
+.results-actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .9rem; }
+
 /* ---------- print ---------- */
 
 @media print {
